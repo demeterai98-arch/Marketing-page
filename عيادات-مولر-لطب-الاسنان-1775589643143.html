@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حلول النخبة | {{ $json["Specialty"] }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0a192f; --accent: #d4af37; --text: #333; --light: #f8f9fa; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background-color: var(--light); color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: linear-gradient(135deg, var(--primary) 0%, #112240 100%); color: white; padding: 120px 0; text-align: center; border-bottom: 4px solid var(--accent); }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; line-height: 1.2; }
+        h1 span { color: var(--accent); }
+        .subtitle { font-size: 1.5rem; font-weight: 300; margin-bottom: 40px; color: #8892b0; }
+        .cta-btn { background: var(--accent); color: var(--primary); text-decoration: none; padding: 18px 45px; font-size: 1.2rem; font-weight: 900; border-radius: 8px; transition: 0.3s; display: inline-block; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .cta-btn:hover { background: #b5952f; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
+        .section { padding: 100px 0; }
+        .pain-point { background: white; text-align: center; }
+        .section-title { font-size: 2.8rem; margin-bottom: 40px; color: var(--primary); text-align: center; font-weight: 900; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { background: white; padding: 50px 30px; border-radius: 15px; border-top: 5px solid var(--accent); text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.08); transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { font-size: 1.6rem; margin-bottom: 20px; color: var(--primary); font-weight: 700; }
+        .card p { color: #555; font-size: 1.1rem; }
+        .solution { background: var(--primary); color: white; }
+        .solution .section-title { color: white; }
+        .solution .card { background: #112240; border-top: 5px solid var(--accent); box-shadow: none; }
+        .solution .card h3 { color: var(--accent); }
+        .solution .card p { color: #8892b0; }
+        .trust { text-align: center; background: white; }
+        .stat-wrap { display: flex; justify-content: center; flex-wrap: wrap; gap: 50px; }
+        .stat-box { margin: 20px; }
+        .stat-num { font-size: 4rem; color: var(--accent); font-weight: 900; margin-bottom: 10px; }
+        .stat-text { font-size: 1.2rem; color: #666; font-weight: 700; }
+        .final-cta { background: linear-gradient(135deg, var(--primary) 0%, #112240 100%); color: white; text-align: center; padding: 100px 0; border-top: 4px solid var(--accent); }
+        @media(max-width: 768px) { h1 { font-size: 2.2rem; } .subtitle { font-size: 1.2rem; } .section-title { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ارتقِ بأعمالك في <span>{{ $json["Specialty"] }}</span></h1>
+            <p class="subtitle">الحل النهائي لتجاوز تحديات {{ $json["Pain Point"] || "تحسين تجربة العميل" }} بثقة واحترافية مطلقة.</p>
+            <a href="#contact" class="cta-btn">ابدأ رحلة التحول الآن</a>
+        </div>
+    </header>
+    
+    <section class="section pain-point">
+        <div class="container">
+            <h2 class="section-title">هل تستنزف هذه التحديات مواردك؟</h2>
+            <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto; text-align: center; color: #555;">نحن ندرك تماماً أن التعامل مع <strong style="color: var(--primary);">{{ $json["Pain Point"] || "تحسين تجربة العميل" }}</strong> ليس مجرد عقبة عابرة، بل هو تحدٍ جوهري يؤثر بشكل مباشر على معدلات النمو وموقعك التنافسي في قطاع {{ $json["Specialty"] }}. الاستمرار بالأساليب التقليدية يعني خسارة المزيد من الفرص.</p>
+        </div>
+    </section>
+
+    <section class="section solution">
+        <div class="container">
+            <h2 class="section-title">منهجية النخبة المصممة للريادة</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>كفاءة تشغيلية فائقة</h3>
+                    <p>أدوات واستراتيجيات متقدمة لتقليل الهدر الزمني والمادي، لتتفرغ قيادتك للتطوير الاستراتيجي بدل الغرق في التفاصيل اليومية.</p>
+                </div>
+                <div class="card">
+                    <h3>معالجة جذرية ومستدامة</h3>
+                    <p>نظام متكامل يحلل ويعالج {{ $json["Pain Point"] || "تحسين تجربة العميل" }} من الجذور لضمان عدم تكرارها وتحقيق استقرار طويل الأمد.</p>
+                </div>
+                <div class="card">
+                    <h3>نمو استثنائي</h3>
+                    <p>نؤسس معك بنية تحتية صلبة تضمن لك الهيمنة والاستمرار في قمة التميز ضمن مجالك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section trust">
+        <div class="container">
+            <h2 class="section-title">أرقام تعكس التزامنا بالنجاح</h2>
+            <div class="stat-wrap">
+                <div class="stat-box">
+                    <div class="stat-num">98%</div>
+                    <div class="stat-text">نسبة رضا شركائنا</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">+50</div>
+                    <div class="stat-text">قصة نجاح في القطاع</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">3X</div>
+                    <div class="stat-text">متوسط مضاعفة العائد</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="final-cta">
+        <div class="container">
+            <h2 style="font-size: 2.8rem; margin-bottom: 20px; font-weight: 900;">جاهز لنقل أعمالك للمستوى التالي؟</h2>
+            <p style="margin-bottom: 40px; font-size: 1.3rem; color: #8892b0;">احجز استشارتك الاستراتيجية اليوم لنضع معاً خارطة طريق مخصصة تقودك للريادة.</p>
+            <a href="#" class="cta-btn">تواصل مع خبرائنا الآن</a>
+        </div>
+    </section>
+</body>
+</html>
