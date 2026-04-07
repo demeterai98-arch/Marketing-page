@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حلول {{ $json["Specialty"] }} المتقدمة</title>
+    <style>
+        :root {
+            --primary: #0F172A;
+            --gold: #D4AF37;
+            --text: #334155;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: var(--primary); color: var(--white); padding: 120px 0; text-align: center; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, rgba(15,23,42,1) 80%); }
+        header .container { position: relative; z-index: 1; }
+        header h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--gold); letter-spacing: -1px; line-height: 1.2; }
+        header p { font-size: 1.3rem; max-width: 750px; margin: 0 auto 40px; opacity: 0.9; }
+        .btn { display: inline-block; background: var(--gold); color: var(--primary); padding: 16px 40px; text-decoration: none; font-size: 1.1rem; font-weight: bold; border-radius: 8px; transition: all 0.3s ease; border: 1px solid transparent; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); background: transparent; color: var(--gold); border-color: var(--gold); }
+        .section { padding: 100px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: var(--primary); }
+        .pain-point { background: var(--white); padding: 70px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid var(--primary); }
+        .pain-point h2 { color: #E11D48; margin-bottom: 25px; font-size: 2.2rem; }
+        .pain-point p { font-size: 1.2rem; color: #475569; max-width: 800px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { background: var(--white); padding: 50px 40px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: all 0.4s ease; border-top: 4px solid var(--gold); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .card h3 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; }
+        .card p { color: #64748B; font-size: 1.1rem; }
+        .trust { background: var(--primary); color: var(--white); text-align: center; }
+        .trust h2 { color: var(--gold); font-size: 2.5rem; }
+        .trust-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 50px; }
+        .stat { text-align: center; }
+        .stat-number { display: block; font-size: 3.5rem; color: var(--white); font-weight: bold; margin-bottom: 10px; }
+        .stat-label { color: var(--gold); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .cta-section { text-align: center; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); }
+        .btn-dark { background: var(--primary); color: var(--white); }
+        .btn-dark:hover { background: transparent; color: var(--primary); border-color: var(--primary); box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15); }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .pain-point { padding: 40px 20px; }
+            .pain-point h2 { font-size: 1.8rem; }
+            .trust-stats { gap: 30px; }
+            .stat-number { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>ارتقِ بمعايير {{ $json["Specialty"] }}</h1>
+        <p>نقدم لك الحل الجذري لتجاوز عقبات {{ $json["Pain Point"] || "تحسين تجربة العميل" }}، المصمم خصيصاً ليناسب تطلعات عملائك ويرفع من كفاءة أعمالك إلى مستويات غير مسبوقة.</p>
+        <a href="#contact" class="btn">اكتشف الحل الآن</a>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container">
+        <div class="pain-point">
+            <h2>هل يعيقك {{ $json["Pain Point"] || "تحسين تجربة العميل" }}؟</h2>
+            <p>في عالم الأعمال اليوم، يعتبر التعامل مع هذا التحدي استنزافاً حقيقياً للوقت والموارد. نحن ندرك أن استمراره يعني خسارة فرص نمو محققة وتراجعاً في رضا العملاء. لم يعد مقبولاً الاعتماد على حلول تقليدية لا ترقى لمستوى طموحاتك.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h2 class="section-title">الحل المبتكر والمخصص لك</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>كفاءة تشغيلية فائقة</h3>
+                <p>نظامنا يقلص الجهد المبذول ويختصر الوقت، مما يسمح لفريقك بالتركيز على التوسع والابتكار بدلاً من إطفاء الحرائق اليومية.</p>
+            </div>
+            <div class="card">
+                <h3>تجربة استثنائية</h3>
+                <p>تخلص من التعقيدات التشغيلية وقدم لعملائك رحلة سلسة تعكس فخامة واحترافية علامتك التجارية.</p>
+            </div>
+            <div class="card">
+                <h3>نمو مستدام ومدروس</h3>
+                <p>استراتيجيات مبنية على بيانات دقيقة تضمن لك عائداً ممتازاً على الاستثمار وتفوقاً مستمراً على المنافسين.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section trust">
+    <div class="container">
+        <h2>انضم لنخبة رواد الأعمال</h2>
+        <p style="margin: 20px 0 0; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">وثقت بنا كبرى الشركات لتجاوز التحديات وتحقيق قفزات نوعية. كن أنت قصة النجاح القادمة.</p>
+        <div class="trust-stats">
+            <div class="stat">
+                <span class="stat-number">+50</span>
+                <span class="stat-label">شريك نجاح</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">نسبة الرضا</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">3x</span>
+                <span class="stat-label">مضاعفة الأداء</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section cta-section">
+    <div class="container">
+        <h2 class="section-title" style="margin-bottom: 20px;">هل أنت مستعد لإحداث التغيير؟</h2>
+        <p style="margin-bottom: 40px; font-size: 1.2rem; color: #475569;">احجز جلستك الاستشارية لنناقش كيف يمكننا تخصيص حلولنا لتلائم احتياجاتك بدقة واحترافية.</p>
+        <a href="https://wa.me/" class="btn btn-dark">تواصل معنا عبر واتساب</a>
+    </div>
+</section>
+
+</body>
+</html>
