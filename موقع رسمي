@@ -1,0 +1,740 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replix | نضاعف حجوزات عيادتك عبر منصات رقمية عالية التحويل</title>
+    
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="وكالة رقمية متخصصة في بناء مواقع إلكترونية لعيادات الأسنان مصممة خصيصاً لزيادة الحجوزات وتحويل الزوار إلى مرضى.">
+    <meta property="og:title" content="Replix | مواقع عيادات طبية عالية التحويل">
+    <meta property="og:description" content="وكالة رقمية متخصصة في بناء مواقع إلكترونية لعيادات الأسنان مصممة خصيصاً لزيادة الحجوزات وتحويل الزوار إلى مرضى.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#D4AF37">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" loading="lazy">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable Dark Mode via Class
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Tajawal', 'sans-serif'], 
+                        serif: ['Cinzel', 'serif'] 
+                    },
+                    colors: {
+                        gold: { 400: '#FBBF24', 500: '#D4AF37', 600: '#B8860B', 700: '#8A6300' },
+                        dark: { 900: '#050505', 800: '#0F0F0F', 700: '#1A1A1A' }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(212, 175, 55, 0.3)',
+                        'glow-lg': '0 0 40px rgba(212, 175, 55, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body { overflow-x: hidden; }
+        
+        /* Glass Header Adaptable */
+        .glass-header { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-header {
+            background: rgba(5, 5, 5, 0.95); 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .text-gradient { 
+            background: linear-gradient(135deg, #D4AF37 0%, #FDF5A6 50%, #B8860B 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        .btn-pulse { animation: pulse-gold 2s infinite; }
+        
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu { transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+        #mobile-menu.hidden-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        #mobile-menu.active-menu { opacity: 1; visibility: visible; pointer-events: auto; }
+    </style>
+</head>
+<body class="antialiased bg-gray-50 text-gray-900 dark:bg-[#050505] dark:text-[#f3f4f6] transition-colors duration-300">
+
+    <!-- Header Wrapper -->
+    <header id="main-header" class="fixed w-full z-50 transition-all duration-300 top-0">
+        <!-- Scarcity Top Bar -->
+        <div id="top-bar" class="bg-gold-600 text-dark-900 text-xs sm:text-sm font-bold text-center py-2 px-4 flex justify-center items-center gap-2 transition-all duration-300 overflow-hidden">
+            <i class="fas fa-bolt animate-pulse"></i>
+            <span>لضمان أعلى جودة، نقبل 5 عيادات فقط شهرياً. (متبقي مقعدين لشهر الحالي)</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav id="navbar" class="w-full transition-all duration-300 py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex justify-between items-center">
+                    <a href="#" class="font-serif text-3xl tracking-widest text-gray-900 dark:text-white font-bold" aria-label="الرئيسية">REPLIX<span class="text-gold-500">.</span></a>
+                    
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                        <a href="#problem" class="text-gray-600 dark:text-gray-300 hover:text-gold-500 text-sm font-bold transition-colors">المشكلة</a>
+                        <a href="#portfolio" class="text-gray-600 dark:text-gray-300 hover:text-gold-500 text-sm font-bold transition-colors">أعمالنا</a>
+                        <a href="#blog" class="text-gray-600 dark:text-gray-300 hover:text-gold-500 text-sm font-bold transition-colors">المدونة</a>
+                        <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-gold-500 text-sm font-bold transition-colors">الباقات</a>
+                        
+                        <!-- Theme Toggle Button -->
+                        <button onclick="toggleTheme()" class="text-gray-600 dark:text-gray-300 hover:text-gold-500 w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-dark-800 transition-colors mr-2 focus:outline-none" aria-label="تغيير المظهر">
+                            <i id="theme-icon-desktop" class="fas fa-moon text-lg"></i>
+                        </button>
+
+                        <button onclick="document.getElementById('cta-section').scrollIntoView();" class="px-6 py-2.5 bg-gold-500 text-dark-900 transition-all duration-300 rounded-lg text-sm font-extrabold hover:bg-gold-400 btn-pulse flex items-center gap-2">
+                            <span>احجز استشارة</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Controls -->
+                    <div class="md:hidden flex items-center gap-4">
+                        <button onclick="toggleTheme()" class="text-gray-600 dark:text-gray-300 text-xl focus:outline-none">
+                            <i id="theme-icon-mobile" class="fas fa-moon"></i>
+                        </button>
+                        <button id="menu-toggle" class="text-gray-900 dark:text-white text-2xl focus:outline-none">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden-menu fixed inset-0 bg-white/95 dark:bg-dark-900/95 backdrop-blur-md z-[60] flex flex-col justify-center items-center gap-8">
+        <button id="close-menu" class="absolute top-6 right-6 text-gray-900 dark:text-white text-3xl focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#problem" class="mobile-link text-gray-900 dark:text-white hover:text-gold-500 text-2xl font-bold transition-colors">المشكلة</a>
+        <a href="#portfolio" class="mobile-link text-gray-900 dark:text-white hover:text-gold-500 text-2xl font-bold transition-colors">أعمالنا</a>
+        <a href="#blog" class="mobile-link text-gray-900 dark:text-white hover:text-gold-500 text-2xl font-bold transition-colors">المدونة</a>
+        <a href="#pricing" class="mobile-link text-gray-900 dark:text-white hover:text-gold-500 text-2xl font-bold transition-colors">الباقات</a>
+        <button onclick="document.getElementById('cta-section').scrollIntoView(); closeMobileMenu();" class="mt-4 px-8 py-4 bg-gold-500 text-dark-900 rounded-xl text-lg font-extrabold btn-pulse flex items-center gap-2">
+            احجز استشارة مجانية <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- 1. HERO -->
+    <section id="home" class="relative min-h-[100vh] flex items-center justify-center pt-24 pb-16">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&fm=webp&w=1920&q=70" class="w-full h-full object-cover opacity-10 dark:opacity-20 transition-opacity duration-300" alt="عيادة أسنان فاخرة">
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-50/90 via-gray-50/95 to-gray-50 dark:from-dark-900/80 dark:via-dark-900/90 dark:to-dark-900 z-10 transition-colors duration-300"></div>
+        </div>
+        
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+            <div class="inline-flex items-center border border-gold-500/30 bg-gold-500/10 text-gold-600 dark:text-gold-500 px-5 py-2 rounded-full text-sm font-bold mb-8 reveal">
+                <i class="fas fa-star ml-2"></i> متخصصون حصرياً في مواقع العيادات الطبية
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white mb-6 leading-tight reveal" style="transition-delay: 100ms;">
+                موقعك الحالي مجرد تصميم جميل؟ <br class="hidden md:block">
+                نحن نبني <span class="text-gradient underline decoration-gold-500/30 underline-offset-8">آلة حجز مواعيد</span> تعمل 24/7
+            </h1>
+            
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto font-medium leading-relaxed reveal" style="transition-delay: 200ms;">
+                لا تدفع مبالغ طائلة على الإعلانات لتخسر الزوار بسبب موقع بطيء أو معقد. صمم منصة رقمية فاخرة تحول الزائر المتردد إلى مريض دائم في عيادتك.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal" style="transition-delay: 300ms;">
+                <button onclick="document.getElementById('cta-section').scrollIntoView();" class="w-full sm:w-auto px-10 py-5 bg-gold-500 text-dark-900 font-extrabold text-lg rounded-xl hover:bg-gold-400 transition-all shadow-glow hover:shadow-glow-lg btn-pulse">
+                    احصل على موقعك خلال 7 أيام
+                </button>
+                <button onclick="document.getElementById('portfolio').scrollIntoView();" class="w-full sm:w-auto px-10 py-5 bg-white dark:bg-dark-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-bold text-lg rounded-xl hover:border-gold-500 hover:text-gold-600 dark:hover:text-gold-500 transition-all flex justify-center items-center gap-2">
+                    شاهد دراسات الحالة <i class="fas fa-play text-sm"></i>
+                </button>
+            </div>
+            
+            <div class="mt-10 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-gray-500 font-bold reveal" style="transition-delay: 400ms;">
+                <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> ضمان استرداد 100%</span>
+                <span class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> تسليم في 7 أيام</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. THE PROBLEM -->
+    <section id="problem" class="py-24 bg-white dark:bg-dark-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h3 class="text-red-600 dark:text-red-500 font-bold tracking-widest text-sm mb-4">الواقع المؤلم</h3>
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6 leading-tight">هل موقعك الحالي يطرد مرضاك المحتملين للعيادات المنافسة؟</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+                        90% من المرضى يبحثون عن العيادة على جوجل قبل الحجز. إذا كان موقعك بطيئاً، أو غير متوافق مع الجوال، أو لا يعكس فخامة عيادتك... فأنت تخسر مئات الآلاف شهرياً.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 text-gray-800 dark:text-gray-300 font-medium bg-gray-50 dark:bg-dark-900/50 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-red-500/20 text-red-600 dark:text-red-500 flex items-center justify-center shrink-0"><i class="fas fa-times text-sm"></i></div>
+                            تصميم قديم يقلل من ثقة المريض في جودة العلاج.
+                        </li>
+                        <li class="flex items-start gap-4 text-gray-800 dark:text-gray-300 font-medium bg-gray-50 dark:bg-dark-900/50 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-red-500/20 text-red-600 dark:text-red-500 flex items-center justify-center shrink-0"><i class="fas fa-times text-sm"></i></div>
+                            خطوات حجز معقدة تجعل المريض يخرج دون ترك بياناته.
+                        </li>
+                        <li class="flex items-start gap-4 text-gray-800 dark:text-gray-300 font-medium bg-gray-50 dark:bg-dark-900/50 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-red-500/20 text-red-600 dark:text-red-500 flex items-center justify-center shrink-0"><i class="fas fa-times text-sm"></i></div>
+                            سرعة تحميل بطيئة تؤدي لهروب 53% من الزوار فوراً.
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative reveal mt-10 lg:mt-0">
+                    <div class="absolute inset-0 bg-red-500/10 blur-3xl rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&fm=webp&w=800&q=80" alt="تحليل بيانات الموقع" class="relative rounded-2xl border border-gray-200 dark:border-gray-800 shadow-2xl opacity-90 w-full object-cover" loading="lazy">
+                    <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:-left-6 lg:right-auto bg-white dark:bg-dark-900 border border-gray-200 dark:border-gray-700 p-6 rounded-xl shadow-xl w-[90%] sm:w-auto text-center lg:text-right">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-bold mb-1">نسبة الارتداد (Bounce Rate)</p>
+                        <p class="text-red-600 dark:text-red-500 text-4xl font-black">+78%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. THE SOLUTION -->
+    <section class="py-24 bg-gray-50 dark:bg-dark-900 border-t border-gray-200 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="text-gold-600 dark:text-gold-500 font-bold tracking-widest text-sm mb-4">الحل الجذري</h3>
+            <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-16">منهجية ريبليكس لتحويل الزوار إلى مرضى</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-dark-800 p-10 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-gold-500/50 transition-colors reveal shadow-sm dark:shadow-none">
+                    <div class="w-16 h-16 bg-gold-500/10 text-gold-600 dark:text-gold-500 rounded-xl flex items-center justify-center text-3xl mx-auto mb-6"><i class="fas fa-bolt"></i></div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">سرعة خارقة & SEO</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">نبرمج موقعك بأحدث التقنيات ليحمل في أقل من ثانية، مع تهيئة كاملة ليتصدر نتائج بحث جوجل (SEO) وجذب مرضى يبحثون عن خدماتك الآن.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-800 p-10 rounded-2xl border border-gold-400 dark:border-gold-500/30 shadow-lg dark:shadow-[0_0_30px_rgba(212,175,55,0.1)] relative transform lg:-translate-y-4 reveal" style="transition-delay: 100ms;">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gold-500 text-dark-900 text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">العنصر السري</div>
+                    <div class="w-16 h-16 bg-gold-500 text-dark-900 rounded-xl flex items-center justify-center text-3xl mx-auto mb-6"><i class="fas fa-filter"></i></div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">مسار تحويل (Funnel) ذكي</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">لا نضع مجرد صفحات، بل نصمم رحلة نفسية للزائر تبني الثقة فوراً وتوجهه بسلاسة تامة نحو زر "احجز موعدك الآن".</p>
+                </div>
+
+                <div class="bg-white dark:bg-dark-800 p-10 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-gold-500/50 transition-colors reveal shadow-sm dark:shadow-none" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-gold-500/10 text-gold-600 dark:text-gold-500 rounded-xl flex items-center justify-center text-3xl mx-auto mb-6"><i class="fas fa-gem"></i></div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">فخامة بصرية (UI/UX)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base">تصميم يعكس رقي عيادتك. نستخدم قواعد تصميم العلامات التجارية الفاخرة لتبرير أسعار خدماتك المرتفعة (Premium Pricing) للمريض.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PORTFOLIO - نماذج الشغل الحقيقية -->
+    <section id="portfolio" class="py-24 bg-white dark:bg-dark-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-6">نماذج من أعمالنا</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">مواقع حقيقية صممناها لعيادات متنوعة — كل موقع بهوية بصرية مختلفة تعكس شخصية العيادة وجمهورها.</p>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Project 1: عيادة عبد الله -->
+                <div class="reveal group">
+                    <div class="bg-gray-50 dark:bg-dark-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-gold-500/40 transition-all duration-500 hover:shadow-lg dark:hover:shadow-[0_0_40px_rgba(212,175,55,0.08)]">
+                        <div class="flex items-center gap-2 px-4 py-3 bg-gray-200 dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-gray-800">
+                            <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+                            <div class="flex-1 mx-4 bg-white dark:bg-dark-800 rounded-md px-3 py-1 text-xs text-gray-600 dark:text-gray-500 font-mono text-center border border-gray-200 dark:border-gray-700 truncate">
+                                abdallah-dental.replix.sa
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-5">
+                            <div class="lg:col-span-3 relative overflow-hidden" style="height: 380px;">
+                                <div class="absolute top-0 right-0 w-[167%] h-[167%] origin-top-right scale-[0.6]">
+                                    <div style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); width: 100%; height: 100%; position: relative; font-family: 'Tajawal', sans-serif; direction: rtl; overflow: hidden;">
+                                        <div style="background: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <div style="width: 36px; height: 36px; background: #0d9488; border-radius: 50%; display: flex; align-items: center; justify-content: center;">🦷</div>
+                                                <span style="font-weight: 800; font-size: 20px; color: #1e293b;">عيادة <span style="color: #0d9488;">عبد الله</span></span>
+                                            </div>
+                                            <div style="display: flex; gap: 24px; font-size: 14px; color: #6b7280; font-weight: 600;">
+                                                <span>الرئيسية</span><span>من نحن</span><span>خدماتنا</span>
+                                                <span style="background: #0d9488; color: white; padding: 8px 20px; border-radius: 9999px; font-weight: 700;">احجز موعدك</span>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 60px 40px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+                                            <div>
+                                                <div style="background: white; border: 1px solid rgba(13,148,136,0.2); color: #0d9488; padding: 6px 16px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 20px;">⭐ العيادة الرائدة في رعاية الأسنان</div>
+                                                <h1 style="font-size: 52px; font-weight: 900; color: #1e293b; line-height: 1.2; margin-bottom: 20px;">ابتسامة مثالية، <br><span style="background: linear-gradient(to left, #0d9488, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">لحياة أكثر ثقة.</span></h1>
+                                                <p style="color: #6b7280; font-size: 16px; margin-bottom: 28px; line-height: 1.7;">نقدم لك ولعائلتك رعاية أسنان متكاملة بأحدث التقنيات العالمية</p>
+                                                <div style="display: flex; gap: 16px;">
+                                                    <div style="background: #0d9488; color: white; padding: 14px 32px; border-radius: 9999px; font-weight: 700; font-size: 15px;">استشارة مجانية</div>
+                                                </div>
+                                            </div>
+                                            <div style="position: relative;">
+                                                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&fm=webp&w=600&q=70" style="width: 100%; height: 320px; object-fit: cover; border-radius: 48px;" alt="عيادة أسنان" loading="lazy"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 p-8 flex flex-col justify-center border-t lg:border-t-0 lg:border-r border-gray-200 dark:border-gray-800">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    <span class="text-green-600 dark:text-green-400 text-xs font-bold">تصميم عيادة طب أسنان</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">عيادة عبد الله لطب الأسنان</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">هوية بصرية تيل نظيفة ومريحة. موقع متعدد الصفحات مع مسار حجز مدمج، سريع التحميل ومتجاوب مع الجوال بالكامل.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="text-xs bg-white dark:bg-dark-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full">نظيف وبسيط</span>
+                                    <span class="text-xs bg-white dark:bg-dark-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full">مسار حجز ذكي</span>
+                                    <span class="text-xs bg-white dark:bg-dark-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full">SEO محسّن</span>
+                                </div>
+                                <button onclick="document.getElementById('cta-section').scrollIntoView();" class="text-gold-600 dark:text-gold-500 font-bold hover:text-gold-700 dark:hover:text-white transition flex items-center gap-2 text-sm w-fit">
+                                    أريد موقع بهذا الأسلوب <i class="fas fa-arrow-left text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: مجمع الملك فهد -->
+                <div class="reveal group">
+                    <div class="bg-gray-50 dark:bg-dark-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-gold-500/40 transition-all duration-500 hover:shadow-lg dark:hover:shadow-[0_0_40px_rgba(212,175,55,0.08)]">
+                        <div class="flex items-center gap-2 px-4 py-3 bg-gray-200 dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-gray-800">
+                            <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+                            <div class="flex-1 mx-4 bg-white dark:bg-dark-800 rounded-md px-3 py-1 text-xs text-gray-600 dark:text-gray-500 font-mono text-center border border-gray-200 dark:border-gray-700 truncate">
+                                almaleek-fahad.replix.sa
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-5">
+                            <div class="lg:col-span-3 relative overflow-hidden order-1 lg:order-2" style="height: 380px;">
+                                <div class="absolute top-0 left-0 w-[167%] h-[167%] origin-top-left scale-[0.6]">
+                                    <div style="background: radial-gradient(circle at center, #1E293B 0%, #0F172A 100%); width: 100%; height: 100%; position: relative; font-family: 'Tajawal', sans-serif; direction: rtl; overflow: hidden; color: #e2e8f0;">
+                                        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(15,23,42,0.8); border-bottom: 1px solid rgba(197,160,89,0.1);">
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <span style="color: #C5A059; font-size: 22px;">👑</span>
+                                                <span style="font-weight: 700; font-size: 18px;">مجمع <span style="color: #C5A059;">المل الملك فهد</span></span>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 60px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+                                            <div>
+                                                <span style="color: #C5A059; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; display: block; margin-bottom: 16px;">الرعاية الملكية</span>
+                                                <h1 style="font-size: 56px; font-weight: 900; line-height: 1.15; margin-bottom: 20px;">نصنع الابتسامة<br>التي تليق بك</h1>
+                                                <div style="background: #C5A059; color: #0F172A; padding: 16px 36px; border-radius: 12px; font-weight: 700; font-size: 15px; display: inline-block;">ابدأ رحلتك</div>
+                                            </div>
+                                            <div style="border-radius: 40px; overflow: hidden; border: 1px solid rgba(197,160,89,0.3); padding: 8px; background: rgba(15,23,42,0.5);">
+                                                <img src="https://images.unsplash.com/photo-1629909608135-ca40f282483a?auto=format&fit=crop&fm=webp&w=600&q=70" style="width: 100%; height: 280px; object-fit: cover; border-radius: 32px; filter: grayscale(20%);" alt="مجمع طبي"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 p-8 flex flex-col justify-center order-2 lg:order-1 border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-gray-800">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                                    <span class="text-yellow-600 dark:text-yellow-400 text-xs font-bold">تصميم فاخر داكن</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">مجمع الملك فهد لطب الأسنان</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">هوية ملكية داكنة بلمسات ذهبية. لعيادات النخبة التي تستهدف جمهوراً راقياً. الموقع يعكس الثقة والتميز.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="text-xs bg-white dark:bg-dark-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full">Dark Luxury</span>
+                                    <span class="text-xs bg-white dark:bg-dark-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full">هوية ملكية</span>
+                                </div>
+                                <button onclick="document.getElementById('cta-section').scrollIntoView();" class="text-gold-600 dark:text-gold-500 font-bold hover:text-gold-700 dark:hover:text-white transition flex items-center gap-2 text-sm w-fit">
+                                    أريد موقع بهذا الأسلوب <i class="fas fa-arrow-left text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 text-center reveal">
+                <p class="text-gray-500 mb-4 text-sm font-medium">كل موقع مبني من صفر — لا قوالب جاهزة، لا تكرار.</p>
+                <button onclick="document.getElementById('cta-section').scrollIntoView();" class="px-8 sm:px-10 py-4 bg-gold-500 text-dark-900 font-black rounded-xl hover:bg-gold-400 transition-all shadow-glow btn-pulse flex items-center justify-center gap-3 mx-auto w-full sm:w-auto">
+                    أريد موقعاً بهوية خاصة بعيادتي <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. BLOG & INSIGHTS (Replaces Testimonials) -->
+    <section id="blog" class="py-24 bg-gray-50 dark:bg-dark-900 border-y border-gray-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 reveal gap-6">
+                <div class="text-center md:text-right">
+                    <h3 class="text-gold-600 dark:text-gold-500 font-bold tracking-widest text-sm mb-2">رؤى واستراتيجيات</h3>
+                    <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white">مدونة ريبليكس</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-lg">اكتشف أحدث التكتيكات التسويقية التي نستخدمها لمضاعفة أرباح عيادات النخبة.</p>
+                </div>
+                <!-- Desktop Blog Button -->
+                <a href="#blog-page" target="_blank" class="hidden md:flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 font-bold transition-colors">
+                    تصفح كل المقالات <i class="fas fa-arrow-left text-sm"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-gold-500/50 hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] transition-all duration-300 reveal cursor-pointer">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&fm=webp&w=600&q=80" alt="تحليل بيانات الموقع" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                        <div class="absolute top-4 right-4 bg-gold-500 text-dark-900 text-xs font-bold px-3 py-1 rounded-full">تحسين التحويل</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-600 dark:group-hover:text-gold-500 transition-colors">كيف تضاعف حجوزات عيادتك دون زيادة ميزانية الإعلانات؟</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">اكتشف السر وراء المواقع التي تحول الزوار إلى مرضى دائمين، ولماذا يعتبر مسار التحويل أهم بكثير من مجرد تصميم جميل.</p>
+                        <span class="text-gold-600 dark:text-gold-500 font-bold text-sm flex items-center gap-2">اقرأ المقال <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-2"></i></span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-gold-500/50 hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] transition-all duration-300 reveal cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&fm=webp&w=600&q=80" alt="سيو للعيادات" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                        <div class="absolute top-4 right-4 bg-dark-900 text-white text-xs font-bold px-3 py-1 rounded-full border border-gray-700">SEO للعيادات</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-600 dark:group-hover:text-gold-500 transition-colors">الدليل الشامل لتصدر نتائج بحث جوجل (Google) في مدينتك</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">المرضى يبحثون الآن عن "أفضل طبيب أسنان بالقرب مني". تعلم كيف تضع عيادتك في النتيجة الأولى لتستحوذ على حصة السوق.</p>
+                        <span class="text-gold-600 dark:text-gold-500 font-bold text-sm flex items-center gap-2">اقرأ المقال <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-2"></i></span>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden group hover:border-gold-500/50 hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] transition-all duration-300 reveal cursor-pointer" style="transition-delay: 200ms;">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&fm=webp&w=600&q=80" alt="تجربة المستخدم" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                        <div class="absolute top-4 right-4 bg-dark-900 text-white text-xs font-bold px-3 py-1 rounded-full border border-gray-700">تصميم وتجربة (UX)</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gold-600 dark:group-hover:text-gold-500 transition-colors">علم النفس وراء تصميم المواقع الطبية الفاخرة</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2">كيف تستخدم الألوان، المساحات الفارغة، والخطوط لإيصال رسالة "الفخامة والثقة" التي تبرر أسعار علاجاتك المرتفعة.</p>
+                        <span class="text-gold-600 dark:text-gold-500 font-bold text-sm flex items-center gap-2">اقرأ المقال <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-2"></i></span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Mobile Blog Button -->
+            <div class="mt-10 md:hidden text-center reveal">
+                 <a href="#blog-page" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-xl font-bold border border-gray-300 dark:border-gray-700 hover:border-gold-500 dark:hover:border-gold-500 transition-colors w-full sm:w-auto shadow-sm">
+                    تصفح جميع مقالات المدونة <i class="fas fa-external-link-alt text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PRICING -->
+    <section id="pricing" class="py-24 bg-white dark:bg-dark-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6">استثمار يعيد قيمته من أول شهر</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">باقات شفافة، بدون تكاليف خفية. اختر الباقة التي تناسب حجم طموح عيادتك.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+                <!-- Basic -->
+                <div class="bg-gray-50 dark:bg-dark-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">باقة الانطلاقة</h3>
+                    <p class="text-gray-500 text-sm mb-6 h-10">للعيادات الناشئة التي تبحث عن تواجد رقمي احترافي.</p>
+                    <div class="text-3xl font-black text-gray-900 dark:text-white mb-8">4,900 <span class="text-lg text-gray-500 font-normal">ريال</span></div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> موقع تعريفي (صفحة واحدة هبوط)</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> تصميم متجاوب مع الجوال</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> زر اتصال وواتساب مباشر</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> تسليم خلال 5 أيام عمل</li>
+                    </ul>
+                    <button onclick="document.getElementById('cta-section').scrollIntoView();" class="w-full py-4 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">اطلب الباقة</button>
+                </div>
+
+                <!-- Premium -->
+                <div class="bg-white dark:bg-dark-900 rounded-2xl p-8 border-2 border-gold-500 relative transform md:-translate-y-4 shadow-xl dark:shadow-[0_0_40px_rgba(212,175,55,0.15)] reveal" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold-500 text-dark-900 font-bold px-4 py-1 rounded-full text-sm whitespace-nowrap">الأكثر طلباً للتحويل</div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">باقة النمو <i class="fas fa-fire text-orange-500 ml-2"></i></h3>
+                    <p class="text-gray-500 text-sm mb-6 h-10">لمجمعات الأسنان التي تعتمد على الحملات الإعلانية.</p>
+                    <div class="text-3xl font-black text-gray-900 dark:text-white mb-8">9,500 <span class="text-lg text-gray-500 font-normal">ريال</span></div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> موقع متعدد الصفحات (لغاية 5)</li>
+                        <li class="flex items-center gap-3 text-gray-900 dark:text-white font-bold"><i class="fas fa-check text-gold-500"></i> مسار تحويل (Funnel) مخصص</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> فورم حجز مواعيد ذكي</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> تهيئة أساسية لمحركات البحث (SEO)</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> ربط بكسل التتبع (Meta/Google)</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> تسليم خلال 10 أيام عمل</li>
+                    </ul>
+                    <button onclick="document.getElementById('cta-section').scrollIntoView();" class="w-full py-4 rounded-xl bg-gold-500 text-dark-900 font-extrabold hover:bg-gold-400 transition btn-pulse">ابدأ بتحقيق الأرباح الآن</button>
+                </div>
+
+                <!-- Elite -->
+                <div class="bg-gray-50 dark:bg-dark-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">باقة السيادة</h3>
+                    <p class="text-gray-500 text-sm mb-6 h-10">حلول برمجية مخصصة للعلامات الطبية الكبرى.</p>
+                    <div class="text-2xl font-black text-gray-900 dark:text-white mb-8">طلب تسعيرة <span class="text-lg text-gray-500 font-normal">خاصة</span></div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> كل ما في باقة النمو +</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> تصميم UI/UX حصري من الصفر</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> لوحة تحكم لإدارة الحجوزات (CRM)</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> أتمتة الرسائل (WhatsApp API)</li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><i class="fas fa-check text-gold-500"></i> دعم فني VIP مدار الساعة</li>
+                    </ul>
+                    <button onclick="document.getElementById('cta-section').scrollIntoView();" class="w-full py-4 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">تواصل مع خبير</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. LEAD MAGNET -->
+    <section class="py-20 bg-gold-500 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div class="max-w-5xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-1 text-center md:text-right reveal">
+                <h2 class="text-3xl md:text-4xl font-black text-dark-900 mb-4">لست مستعداً للشراء بعد؟</h2>
+                <p class="text-dark-800 font-bold mb-6 text-lg">حمل دليلنا المجاني: "7 أخطاء قاتلة في موقع عيادتك تفقدك المرضى يومياً وكيفية إصلاحها".</p>
+                
+                <form class="flex flex-col sm:flex-row gap-3" onsubmit="alert('تم إرسال الدليل إلى بريدك الإلكتروني بنجاح!'); return false;">
+                    <input type="email" placeholder="أدخل بريدك الإلكتروني هنا..." required class="flex-1 px-6 py-4 rounded-xl bg-white text-dark-900 focus:outline-none focus:ring-2 focus:ring-dark-900 font-bold placeholder-gray-400 shadow-sm">
+                    <button type="submit" class="px-8 py-4 bg-dark-900 text-white rounded-xl font-bold hover:bg-dark-800 transition flex items-center justify-center gap-2">أرسل لي الدليل <i class="fas fa-download"></i></button>
+                </form>
+            </div>
+            <div class="hidden md:block w-64 reveal">
+                <div class="bg-dark-900 h-80 rounded-r-2xl rounded-l-md border-r-8 border-gray-700 shadow-2xl flex items-center justify-center p-6 transform -rotate-6 transition hover:rotate-0 duration-300 cursor-pointer">
+                    <div class="text-center">
+                        <i class="fas fa-book text-gold-500 text-5xl mb-4"></i>
+                        <h3 class="text-white font-bold text-xl leading-relaxed">دليل العيادات<br>الرقمي</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FINAL CTA -->
+    <section id="cta-section" class="py-32 bg-gray-50 dark:bg-dark-900 border-t border-gray-200 dark:border-white/5 relative transition-colors duration-300">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-30"></div>
+        
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white dark:bg-dark-800 p-6 sm:p-8 md:p-12 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-2xl reveal relative overflow-hidden transition-colors duration-300">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+                
+                <div class="text-center mb-10 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">شاهد نموذج موقعك قبل الدفع!</h2>
+                    <p class="text-gray-600 dark:text-gray-400 text-lg">احجز استشارة استراتيجية مجانية لمدة 15 دقيقة. سنحلل تواجدك الرقمي ونقترح خطة عمل مخصصة لعيادتك.</p>
+                </div>
+
+                <form id="conversion-form" class="space-y-6 relative z-10" onsubmit="handleFormSubmission(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-400 text-sm font-bold mb-2" for="clinic_name">اسم العيادة أو الطبيب *</label>
+                            <input type="text" id="clinic_name" name="name" required class="w-full bg-gray-50 dark:bg-dark-900 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors shadow-inner">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-400 text-sm font-bold mb-2" for="phone_number">رقم الجوال (للتواصل السريع) *</label>
+                            <input type="tel" id="phone_number" name="phone" required class="w-full bg-gray-50 dark:bg-dark-900 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors shadow-inner" placeholder="05X XXX XXXX" dir="ltr">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 dark:text-gray-400 text-sm font-bold mb-2" for="website_url">رابط الموقع الحالي أو حساب إنستجرام</label>
+                        <input type="url" id="website_url" name="website" class="w-full bg-gray-50 dark:bg-dark-900 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors shadow-inner" placeholder="https://..." dir="ltr">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 dark:text-gray-400 text-sm font-bold mb-2" for="marketing_challenge">أكبر تحدي تواجهه حالياً في التسويق؟</label>
+                        <select id="marketing_challenge" name="challenge" class="w-full bg-gray-50 dark:bg-dark-900 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors appearance-none cursor-pointer shadow-inner">
+                            <option value="لا يوجد حجوزات كافية">لا يوجد حجوزات كافية من الموقع</option>
+                            <option value="المرضى لا يثقون بجودة العلاج">المرضى لا يثقون بجودة العلاج أونلاين</option>
+                            <option value="الموقع بطيء وتصميمه قديم">الموقع بطيء وتصميمه قديم</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="w-full py-5 bg-gold-500 text-dark-900 font-black text-lg md:text-xl rounded-xl hover:bg-gold-400 transition-all shadow-glow hover:shadow-glow-lg mt-4 flex justify-center items-center gap-3">
+                        <span>احجز الاستشارة المجانية الآن</span>
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+
+                <div id="success-state" class="hidden text-center py-10 relative z-10 transition-all duration-500 opacity-0">
+                    <div class="w-20 h-20 bg-green-500/20 text-green-600 dark:text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">تم استلام طلبك بنجاح!</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">شكراً لثقتك بريبليكس. سيقوم أحد خبرائنا بالتواصل معك عبر الواتساب خلال الساعتين القادمتين لتأكيد موعد الاستشارة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800 dark:border-white/5 pb-24 md:pb-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-serif text-2xl tracking-widest text-white font-bold">REPLIX<span class="text-gold-500">.</span></div>
+            <p class="text-gray-400 dark:text-gray-600 text-sm text-center md:text-right">
+                وكالة ريبليكس الرقمية &copy; 2026. متخصصون في حلول التحويل لعيادات النخبة.
+            </p>
+            <div class="flex gap-6">
+                <a href="#" aria-label="WhatsApp" class="text-gray-400 hover:text-gold-500 transition transform hover:scale-110"><i class="fab fa-whatsapp text-2xl"></i></a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-gold-500 transition transform hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-gold-500 transition transform hover:scale-110"><i class="fab fa-linkedin text-2xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-white/95 dark:bg-dark-900/95 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 p-4 z-40 transition-colors duration-300" id="mobile-cta">
+        <button onclick="document.getElementById('cta-section').scrollIntoView();" class="w-full py-4 bg-gold-500 text-dark-900 font-black rounded-xl shadow-glow btn-pulse text-lg">
+            احجز استشارة مجانية
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- Theme Toggle Logic ---
+        function toggleTheme() {
+            const htmlClass = document.documentElement.classList;
+            htmlClass.toggle('dark');
+            const isDark = htmlClass.contains('dark');
+            
+            // Save preference
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Update icons
+            updateThemeIcons(isDark);
+        }
+
+        function updateThemeIcons(isDark) {
+            const deskIcon = document.getElementById('theme-icon-desktop');
+            const mobIcon = document.getElementById('theme-icon-mobile');
+            
+            if(isDark) {
+                deskIcon.className = 'fas fa-sun text-lg';
+                mobIcon.className = 'fas fa-sun text-xl';
+            } else {
+                deskIcon.className = 'fas fa-moon text-lg';
+                mobIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+
+        // Check LocalStorage on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                updateThemeIcons(false);
+            } else {
+                // Default is dark as per HTML tag
+                updateThemeIcons(true);
+            }
+        });
+
+        // --- Form Submission Logic ---
+        function handleFormSubmission(e) {
+            e.preventDefault();
+            const form = document.getElementById('conversion-form');
+            const btn = document.getElementById('submit-btn');
+            const success = document.getElementById('success-state');
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إرسال الطلب...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            
+            setTimeout(() => {
+                form.style.display = 'none';
+                success.classList.remove('hidden');
+                void success.offsetWidth;
+                success.classList.remove('opacity-0');
+                success.classList.add('opacity-100');
+            }, 1500);
+        }
+
+        // --- Scroll Reveal Animations ---
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        reveals.forEach(el => observer.observe(el));
+
+        // --- Header & Scroll Behavior ---
+        const mainHeader = document.getElementById('main-header');
+        const topBar = document.getElementById('top-bar');
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('glass-header');
+                topBar.style.maxHeight = '0';
+                topBar.style.padding = '0';
+                topBar.style.opacity = '0';
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-2');
+            } else {
+                mainHeader.classList.remove('glass-header');
+                topBar.style.maxHeight = '50px';
+                topBar.style.padding = '0.5rem 1rem';
+                topBar.style.opacity = '1';
+                navbar.classList.remove('py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // --- Mobile Menu Logic ---
+        const menuBtn = document.getElementById('menu-toggle');
+        const closeBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMobileMenu() {
+            mobileMenu.classList.remove('hidden-menu');
+            mobileMenu.classList.add('active-menu');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active-menu');
+            mobileMenu.classList.add('hidden-menu');
+            document.body.style.overflow = 'auto';
+        }
+
+        menuBtn.addEventListener('click', openMobileMenu);
+        closeBtn.addEventListener('click', closeMobileMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+    </script>
+</body>
+</html>
+
+
+`
