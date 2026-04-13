@@ -1,1 +1,1096 @@
-<html><body>Page</body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotana Café</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#050505;
+      --bg2:#0a0a0a;
+      --bg3:#020202;
+      --gold:#d4af37;
+      --gold2:#bf953f;
+      --text:#ffffff;
+      --muted:#9ca3af;
+      --border: rgba(212, 175, 55, 0.2);
+      --border2: rgba(212, 175, 55, 0.5);
+      --shadow: rgba(0,0,0,0.5);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      font-family:'Cairo', sans-serif;
+    }
+
+    ::selection{
+      background:var(--gold);
+      color:#000;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;cursor:pointer}
+    img{display:block;max-width:100%}
+
+    .container{
+      width:min(1200px, calc(100% - 2rem));
+      margin-inline:auto;
+    }
+
+    .gold-gradient-text{
+      background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .luxury-border{
+      border:1px solid var(--border);
+      transition:all .4s ease;
+    }
+    .luxury-border:hover{
+      border-color: rgba(212,175,55,.8);
+      box-shadow: 0 0 20px rgba(212,175,55,.15);
+    }
+
+    .parallax-bg{
+      background-attachment: fixed;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:cover;
+    }
+
+    .reveal-hidden{
+      opacity:0;
+      transform:translateY(40px);
+      transition:all .8s cubic-bezier(.5,0,0,1);
+    }
+    .reveal-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .nav{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:50;
+      transition:all .5s ease;
+    }
+    .nav.scrolled{
+      background: rgba(5,5,5,.9);
+      backdrop-filter: blur(10px);
+      padding:12px 0;
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+    .nav:not(.scrolled){
+      background:transparent;
+      padding:24px 0;
+    }
+
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      cursor:pointer;
+      user-select:none;
+    }
+    .logo-main{
+      font-size:1.9rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      line-height:1;
+    }
+    .logo-sub{
+      font-size:.8rem;
+      letter-spacing:.2em;
+      color:#9ca3af;
+      text-transform:uppercase;
+      margin-top:.25rem;
+    }
+
+    .desktop-menu{
+      display:none;
+      align-items:center;
+      gap:2rem;
+    }
+    .desktop-menu a{
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#e5e7eb;
+      transition:color .2s ease;
+    }
+    .desktop-menu a:hover{color:var(--gold)}
+
+    .lang-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      border:1px solid var(--border2);
+      border-radius:999px;
+      padding:.45rem .9rem;
+      background:transparent;
+      color:#fff;
+      transition:all .2s ease;
+      font-size:.9rem;
+    }
+    .lang-btn:hover{background:rgba(212,175,55,.08)}
+
+    .mobile-toggle{
+      background:none;
+      border:0;
+      color:var(--gold);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:.25rem;
+    }
+
+    .mobile-menu{
+      position:absolute;
+      top:100%;
+      left:0;
+      width:100%;
+      background:#0a0a0a;
+      border-bottom:1px solid var(--border);
+      overflow:hidden;
+      max-height:0;
+      transition:max-height .3s ease, padding .3s ease;
+    }
+    .mobile-menu.open{
+      max-height:24rem;
+      padding:1rem 0;
+    }
+    .mobile-menu-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:1.1rem;
+    }
+    .mobile-menu-inner a{
+      font-size:1.1rem;
+    }
+    .mobile-menu-inner .lang-btn{
+      padding:.55rem 1rem;
+    }
+
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      background-image:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2000&auto=format&fit=crop');
+    }
+    .hero-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.5), var(--bg));
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      margin-top:5rem;
+      padding:2rem 0;
+    }
+
+    .stars{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:.2rem;
+      margin-bottom:1rem;
+    }
+
+    .hero h1{
+      margin:0 0 1rem;
+      font-size:clamp(3rem, 7vw, 5.8rem);
+      line-height:1.1;
+      font-weight:800;
+    }
+    .hero p{
+      margin:0 auto 2rem;
+      max-width:40rem;
+      color:#d1d5db;
+      font-size:clamp(1rem, 2vw, 1.25rem);
+      line-height:1.8;
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:.75rem;
+      border:2px solid var(--gold);
+      color:var(--gold);
+      background:transparent;
+      padding:1rem 1.8rem;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      font-weight:700;
+      font-size:.85rem;
+      transition:all .3s ease;
+    }
+    .cta:hover{
+      background:var(--gold);
+      color:#000;
+    }
+
+    .section{
+      padding:5rem 0;
+    }
+    .section.dark{background:var(--bg2)}
+    .section.black{background:var(--bg)}
+    .section.footer{background:var(--bg3)}
+
+    .section-title{
+      text-align:center;
+      margin-bottom:3rem;
+    }
+    .section-title .eyebrow{
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.8rem;
+      margin-bottom:.5rem;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:clamp(2.2rem, 5vw, 4rem);
+      line-height:1.1;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:2rem;
+      align-items:center;
+    }
+    .about-image-wrap{
+      position:relative;
+    }
+    .about-image-frame{
+      position:relative;
+      z-index:1;
+      padding:.5rem;
+      background:var(--bg);
+    }
+    .about-image-frame img{
+      width:100%;
+      height:500px;
+      object-fit:cover;
+      filter:grayscale(30%);
+      transition:filter .7s ease;
+    }
+    .about-image-frame img:hover{filter:grayscale(0)}
+    .decor-br{
+      position:absolute;
+      right:-1.5rem;
+      bottom:-1.5rem;
+      width:8rem;
+      height:8rem;
+      border-right:2px solid var(--gold);
+      border-bottom:2px solid var(--gold);
+      z-index:0;
+      display:none;
+    }
+    .decor-tl{
+      position:absolute;
+      left:-1.5rem;
+      top:-1.5rem;
+      width:8rem;
+      height:8rem;
+      border-left:2px solid var(--gold);
+      border-top:2px solid var(--gold);
+      z-index:0;
+      display:none;
+    }
+    .about-text h4{
+      margin:0 0 .5rem;
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.8rem;
+    }
+    .about-text h3{
+      margin:0 0 1rem;
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.2;
+    }
+    .about-text p{
+      color:#9ca3af;
+      font-size:1.05rem;
+      line-height:1.9;
+      margin:0 0 1rem;
+    }
+    .signature{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    .signature-line{
+      width:3rem;
+      height:1px;
+      background:var(--gold);
+    }
+    .signature span{
+      font-family:'Playfair Display', serif;
+      font-style:italic;
+      font-size:1.2rem;
+      color:#d1d5db;
+    }
+
+    .tabs{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:.8rem;
+      margin-bottom:3rem;
+    }
+    .tab{
+      border:1px solid var(--border);
+      background:transparent;
+      color:#9ca3af;
+      padding:.85rem 1.5rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.75rem;
+      transition:all .3s ease;
+    }
+    .tab:hover{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+    .tab.active{
+      background:var(--gold);
+      color:#000;
+      font-weight:800;
+      box-shadow:0 0 15px rgba(212,175,55,.4);
+    }
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1.5rem;
+    }
+
+    .card{
+      background:var(--bg2);
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      transition:transform .5s ease;
+    }
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .card-media{
+      position:relative;
+      height:16rem;
+      overflow:hidden;
+    }
+    .card-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .7s ease;
+    }
+    .card:hover .card-media img{
+      transform:scale(1.1);
+    }
+    .card-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(10,10,10,1), transparent);
+      opacity:.9;
+    }
+    .card-title{
+      position:absolute;
+      bottom:1rem;
+      left:1rem;
+      right:1rem;
+      z-index:1;
+      margin:0;
+      font-size:1.45rem;
+      line-height:1.3;
+    }
+
+    .card-body{
+      padding:1.3rem;
+      display:flex;
+      flex-direction:column;
+      flex-grow:1;
+    }
+    .card-desc{
+      color:#9ca3af;
+      font-size:.92rem;
+      line-height:1.8;
+      margin:0 0 1.5rem;
+      flex-grow:1;
+    }
+    .card-footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      border-top:1px solid var(--border);
+      padding-top:1rem;
+      margin-top:auto;
+    }
+    .price{
+      color:var(--gold);
+      font-weight:800;
+      font-size:1.2rem;
+    }
+    .order-btn{
+      background:none;
+      border:0;
+      color:#d1d5db;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.72rem;
+      transition:color .2s ease;
+    }
+    .order-btn:hover{color:var(--gold)}
+
+    .footer-wrap{
+      position:relative;
+      overflow:hidden;
+      padding-top:2rem;
+    }
+    .footer-watermark{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      opacity:.05;
+      pointer-events:none;
+      font-size:clamp(8rem, 20vw, 15rem);
+      font-weight:800;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:2rem;
+      text-align:center;
+      margin-bottom:3rem;
+      position:relative;
+      z-index:1;
+    }
+    .footer-col{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .footer-col h3{
+      margin:0 0 1rem;
+      font-size:1.2rem;
+    }
+    .footer-col p, .footer-col span, .footer-bottom p{
+      color:#9ca3af;
+    }
+
+    .socials{
+      display:flex;
+      gap:.8rem;
+      margin-top:1rem;
+    }
+    .icon-btn{
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      transition:all .2s ease;
+    }
+    .icon-btn:hover{
+      background:var(--gold);
+      color:#000;
+    }
+
+    .contact-box{
+      background:var(--bg2);
+      padding:1.2rem;
+      width:100%;
+      max-width:20rem;
+    }
+
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.1);
+      padding-top:1rem;
+      display:flex;
+      flex-direction:column;
+      gap:.7rem;
+      align-items:center;
+      justify-content:space-between;
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+    }
+    .row.start{
+      align-items:flex-start;
+    }
+
+    .icon{
+      width:20px;
+      height:20px;
+      flex:0 0 auto;
+      color:var(--gold);
+    }
+
+    .ltr{
+      direction:ltr;
+      unicode-bidi:embed;
+    }
+
+    @media (min-width: 768px){
+      .desktop-menu{display:flex}
+      .mobile-toggle{display:none}
+      .about-grid{
+        grid-template-columns:1fr 1fr;
+        gap:4rem;
+      }
+      .decor-br,.decor-tl{display:block}
+      .menu-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .footer-grid{
+        grid-template-columns:repeat(3,1fr);
+        text-align:start;
+      }
+      .footer-col{
+        align-items:flex-start;
+      }
+      .footer-bottom{
+        flex-direction:row;
+        text-align:start;
+      }
+      .footer-bottom > *{
+        width:auto;
+      }
+    }
+
+    @media (min-width: 1024px){
+      .menu-grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <nav class="nav" id="navbar">
+      <div class="container nav-inner">
+        <div class="logo" onclick="location.hash='home'">
+          <span class="logo-main gold-gradient-text">ROTANA</span>
+          <span class="logo-sub">Café</span>
+        </div>
+
+        <div class="desktop-menu" id="desktopMenu">
+          <a href="#home" id="navHome">الرئيسية</a>
+          <a href="#about" id="navAbout">عن روتانا</a>
+          <a href="#menu" id="navMenu">قائمة الطعام</a>
+          <a href="#contact" id="navContact">تواصل معنا</a>
+
+          <button class="lang-btn" id="langBtnDesktop">
+            <span class="icon" id="globeIconDesktop"></span>
+            <span id="langLabelDesktop">FR</span>
+          </button>
+        </div>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="menu toggle">
+          <span class="icon" id="menuIcon"></span>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner container">
+          <a href="#home" id="mNavHome">الرئيسية</a>
+          <a href="#about" id="mNavAbout">عن روتانا</a>
+          <a href="#menu" id="mNavMenu">قائمة الطعام</a>
+          <a href="#contact" id="mNavContact">تواصل معنا</a>
+
+          <button class="lang-btn" id="langBtnMobile">
+            <span class="icon" id="globeIconMobile"></span>
+            <span id="langLabelMobile">Français</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="container hero-content">
+        <div class="reveal-hidden" data-reveal>
+          <div class="stars">
+            <span class="icon" style="width:24px;height:24px;" id="star1"></span>
+            <span class="icon" style="width:32px;height:32px; transform: translateY(-8px);" id="star2"></span>
+            <span class="icon" style="width:24px;height:24px;" id="star3"></span>
+          </div>
+        </div>
+
+        <div class="reveal-hidden" data-reveal data-delay="200">
+          <h1 id="heroTitle"></h1>
+        </div>
+
+        <div class="reveal-hidden" data-reveal data-delay="400">
+          <p id="heroSubtitle"></p>
+        </div>
+
+        <div class="reveal-hidden" data-reveal data-delay="600">
+          <a href="#menu" class="cta" id="heroCta"></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-wrap reveal-hidden" data-reveal>
+            <div class="about-image-frame luxury-border">
+              <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1000&auto=format&fit=crop" alt="Restaurant Interior">
+            </div>
+            <div class="decor-br"></div>
+            <div class="decor-tl"></div>
+          </div>
+
+          <div class="about-text reveal-hidden" data-reveal data-delay="200">
+            <h4>Rotana Experience</h4>
+            <h3 id="aboutTitle"></h3>
+            <p id="aboutDesc1"></p>
+            <p id="aboutDesc2"></p>
+            <div class="signature">
+              <div class="signature-line"></div>
+              <span id="aboutSignature"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section black" id="menu">
+      <div class="container">
+        <div class="section-title reveal-hidden" data-reveal>
+          <div class="eyebrow">Culinary Masterpieces</div>
+          <h2 id="menuTitle"></h2>
+        </div>
+
+        <div class="tabs reveal-hidden" data-reveal data-delay="200" id="categoryTabs"></div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <footer class="section footer" id="contact">
+      <div class="container footer-wrap">
+        <div class="footer-watermark">ROTANA</div>
+
+        <div class="footer-grid">
+          <div class="footer-col reveal-hidden" data-reveal data-delay="100">
+            <div class="logo" style="margin-bottom:1rem;">
+              <span class="logo-main gold-gradient-text">ROTANA</span>
+            </div>
+            <p id="footerAboutText" style="max-width:22rem; line-height:1.8;"></p>
+            <div class="socials">
+              <a href="#" class="icon-btn" aria-label="Instagram">
+                <span class="icon" id="instagramIcon"></span>
+              </a>
+              <a href="#" class="icon-btn" aria-label="Facebook">
+                <span class="icon" id="facebookIcon"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col reveal-hidden" data-reveal data-delay="200">
+            <h3 id="contactTitle"></h3>
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <div class="row start">
+                <span class="icon" id="mapIcon"></span>
+                <span id="contactAddress"></span>
+              </div>
+              <div class="row">
+                <span class="icon" id="phoneIcon"></span>
+                <a href="tel:25001000" class="ltr" style="color:#9ca3af; font-weight:700; font-size:1.05rem;">2500 1000</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-col reveal-hidden" data-reveal data-delay="300">
+            <h3 id="hoursTitle"></h3>
+            <div class="contact-box luxury-border">
+              <p id="contactHours" style="color:var(--gold); text-align:center; font-weight:800; letter-spacing:.16em; font-size:.85rem; margin:0;"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p id="footerRights"></p>
+          <div class="row">
+            <span id="footerMadeBy"></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      ar: {
+        dir: "rtl",
+        font: "'Cairo', sans-serif",
+        nav: { home: "الرئيسية", about: "عن روتانا", menu: "قائمة الطعام", contact: "تواصل معنا" },
+        hero: {
+          titleLeft: "طعم ",
+          titleGold: "الفخامة",
+          subtitle: "تجربة طعام لا تُنسى تجمع بين الأصالة والرقي، حيث نلبي أرقى الأذواق.",
+          cta: "اكتشف القائمة"
+        },
+        about: {
+          title: "قصتنا",
+          description1: "في روتانا كافيه، نؤمن بأن الطعام ليس مجرد وجبة، بل هو فن وتجربة تداعب الحواس. منذ افتتاحنا في موريتانيا، سعينا لتقديم مستوى جديد من الفخامة.",
+          description2: "نستخدم أفضل المكونات الطازجة واللحوم الفاخرة لنقدم لكم أطباقاً عالمية بلمسة شرقية ساحرة، في أجواء مصممة لتمنحكم الراحة والرفاهية المطلقة.",
+          signature: "الشيف التنفيذي"
+        },
+        menu: {
+          title: "القائمة الفاخرة",
+          categories: { shawarma: "شاورما", burgers: "برغر", drinks: "مشروبات" },
+          items: [
+            { id: 1, category: "shawarma", name: "شاورما لحم ملكية", desc: "شرائح لحم الأنجوس المتبلة، طحينة الكمأة، بخبز الصاج المحمص.", price: "350 MRU", img: "https://images.unsplash.com/photo-1648823153744-884c7dd88cd7?q=80&w=800&auto=format&fit=crop" },
+            { id: 2, category: "shawarma", name: "شاورما دجاج سيغنتشر", desc: "دجاج مشوي على الفحم، كريمة الثوم الفاخرة، ومخلل مقرمش.", price: "250 MRU", img: "https://images.unsplash.com/photo-1662116766129-d5964db0c3d9?q=80&w=800&auto=format&fit=crop" },
+            { id: 3, category: "burgers", name: "برغر روتانا الذهبي", desc: "لحم واغيو فاخر، ورق الذهب الصالح للأكل، جبنة الترافل، بصل مكرمل.", price: "850 MRU", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop" },
+            { id: 4, category: "burgers", name: "كلاسيك بلاك أنجوس", desc: "شريحة بلاك أنجوس، شيدر معتق، صوص روتانا الخاص، خبز البريوش.", price: "450 MRU", img: "https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=800&auto=format&fit=crop" },
+            { id: 5, category: "drinks", name: "موهيتو الذهب الوردي", desc: "ليمون طازج، نعناع، سيرب الورد، ورذاذ ذهبي لامع.", price: "150 MRU", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=800&auto=format&fit=crop" },
+            { id: 6, category: "drinks", name: "قهوة روتانا المختصة", desc: "حبوب بن أرابيكا 100٪، محمصة بعناية وتقدم بأسلوب التنقيط.", price: "120 MRU", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop" }
+          ]
+        },
+        contact: {
+          title: "احجز طاولتك",
+          address: "نواكشوط، موريتانيا",
+          hours: "يومياً: 10:00 صباحاً - 2:00 فجراً"
+        },
+        footer: {
+          rights: "جميع الحقوق محفوظة لـ روتانا كافيه",
+          madeBy: "من صنع شركة replix"
+        },
+        order: "اطلب الآن",
+        hoursTitle: "ساعات العمل",
+        langLabelDesktop: "FR",
+        langLabelMobile: "Français",
+        footerAbout: "تجربة طعام لا تُنسى تجمع بين الأصالة والرقي، حيث نلبي أرقى الأذواق.",
+        menuAria: "فتح القائمة",
+        closeAria: "إغلاق القائمة"
+      },
+      fr: {
+        dir: "ltr",
+        font: "'Playfair Display', serif",
+        nav: { home: "Accueil", about: "À Propos", menu: "Menu", contact: "Contact" },
+        hero: {
+          titleLeft: "Le Goût du ",
+          titleGold: "Luxe",
+          subtitle: "Une expérience culinaire inoubliable alliant authenticité et élégance, satisfaisant les palais les plus fins.",
+          cta: "Découvrir le Menu"
+        },
+        about: {
+          title: "Notre Histoire",
+          description1: "Au Rotana Café, nous croyons que la nourriture n'est pas seulement un repas, mais un art et une expérience qui éveille les sens. Depuis notre ouverture en Mauritanie, nous avons cherché à offrir un nouveau niveau de luxe.",
+          description2: "Nous utilisons les meilleurs ingrédients frais et des viandes de première qualité pour vous proposer des plats internationaux avec une touche orientale magique, dans une atmosphère conçue pour vous offrir un confort absolu.",
+          signature: "Le Chef Exécutif"
+        },
+        menu: {
+          title: "Menu Luxueux",
+          categories: { shawarma: "Chawarma", burgers: "Burgers", drinks: "Boissons" },
+          items: [
+            { id: 1, category: "shawarma", name: "Chawarma Viande Royale", desc: "Tranches de bœuf Angus marinées, tahini aux truffes, dans un pain Saj toasté.", price: "350 MRU", img: "https://images.unsplash.com/photo-1648823153744-884c7dd88cd7?q=80&w=800&auto=format&fit=crop" },
+            { id: 2, category: "shawarma", name: "Chawarma Poulet Signature", desc: "Poulet grillé au charbon de bois, crème d'ail premium et cornichons croquants.", price: "250 MRU", img: "https://images.unsplash.com/photo-1662116766129-d5964db0c3d9?q=80&w=800&auto=format&fit=crop" },
+            { id: 3, category: "burgers", name: "Burger Rotana en Or", desc: "Bœuf Wagyu premium, feuille d'or comestible, fromage aux truffes, oignons caramélisés.", price: "850 MRU", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop" },
+            { id: 4, category: "burgers", name: "Classic Black Angus", desc: "Steak Black Angus, cheddar affiné, sauce spéciale Rotana, pain brioché.", price: "450 MRU", img: "https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=800&auto=format&fit=crop" },
+            { id: 5, category: "drinks", name: "Mojito Or Rose", desc: "Citron frais, menthe, sirop de rose et paillettes d'or scintillantes.", price: "150 MRU", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=800&auto=format&fit=crop" },
+            { id: 6, category: "drinks", name: "Café de Spécialité Rotana", desc: "Grains 100% Arabica, soigneusement torréfiés et servis en méthode drip.", price: "120 MRU", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop" }
+          ]
+        },
+        contact: {
+          title: "Réservez votre table",
+          address: "Nouakchott, Mauritanie",
+          hours: "Tous les jours : 10h00 - 02h00"
+        },
+        footer: {
+          rights: "Tous droits réservés © Rotana Café",
+          madeBy: "Créé par la société replix"
+        },
+        order: "Commander",
+        hoursTitle: "Heures d'ouverture",
+        langLabelDesktop: "عربي",
+        langLabelMobile: "العربية",
+        footerAbout: "Une expérience culinaire inoubliable alliant authenticité et élégance, satisfaisant les palais les plus fins.",
+        menuAria: "Ouvrir le menu",
+        closeAria: "Fermer le menu"
+      }
+    };
+
+    let state = {
+      lang: "ar",
+      activeCategory: "shawarma",
+      mobileMenuOpen: false
+    };
+
+    const els = {
+      html: document.documentElement,
+      body: document.body,
+      navbar: document.getElementById("navbar"),
+      mobileMenu: document.getElementById("mobileMenu"),
+      mobileToggle: document.getElementById("mobileToggle"),
+      langBtnDesktop: document.getElementById("langBtnDesktop"),
+      langBtnMobile: document.getElementById("langBtnMobile"),
+      langLabelDesktop: document.getElementById("langLabelDesktop"),
+      langLabelMobile: document.getElementById("langLabelMobile"),
+      navHome: document.getElementById("navHome"),
+      navAbout: document.getElementById("navAbout"),
+      navMenu: document.getElementById("navMenu"),
+      navContact: document.getElementById("navContact"),
+      mNavHome: document.getElementById("mNavHome"),
+      mNavAbout: document.getElementById("mNavAbout"),
+      mNavMenu: document.getElementById("mNavMenu"),
+      mNavContact: document.getElementById("mNavContact"),
+      heroTitle: document.getElementById("heroTitle"),
+      heroSubtitle: document.getElementById("heroSubtitle"),
+      heroCta: document.getElementById("heroCta"),
+      aboutTitle: document.getElementById("aboutTitle"),
+      aboutDesc1: document.getElementById("aboutDesc1"),
+      aboutDesc2: document.getElementById("aboutDesc2"),
+      aboutSignature: document.getElementById("aboutSignature"),
+      menuTitle: document.getElementById("menuTitle"),
+      categoryTabs: document.getElementById("categoryTabs"),
+      menuGrid: document.getElementById("menuGrid"),
+      footerAboutText: document.getElementById("footerAboutText"),
+      contactTitle: document.getElementById("contactTitle"),
+      contactAddress: document.getElementById("contactAddress"),
+      contactHours: document.getElementById("contactHours"),
+      footerRights: document.getElementById("footerRights"),
+      footerMadeBy: document.getElementById("footerMadeBy"),
+      hoursTitle: document.getElementById("hoursTitle"),
+      menuIcon: document.getElementById("menuIcon"),
+      globeIconDesktop: document.getElementById("globeIconDesktop"),
+      globeIconMobile: document.getElementById("globeIconMobile"),
+      star1: document.getElementById("star1"),
+      star2: document.getElementById("star2"),
+      star3: document.getElementById("star3"),
+      instagramIcon: document.getElementById("instagramIcon"),
+      facebookIcon: document.getElementById("facebookIcon"),
+      mapIcon: document.getElementById("mapIcon"),
+      phoneIcon: document.getElementById("phoneIcon")
+    };
+
+    function svgIcon(name){
+      const icons = {
+        menu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`,
+        close: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`,
+        globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>`,
+        star: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>`,
+        instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>`,
+        facebook: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.2-1.5 1.5-1.5H16.8V4.9c-.4-.1-1.8-.2-3.3-.2-3.1 0-5.2 1.9-5.2 5.3V11H5.9v3h2.4v8h5.2z"/></svg>`,
+        map: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>`,
+        phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.9-.9-17.8-8.8-18.7-18.7A2 2 0 0 1 3.1 1h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7 8.7a16 16 0 0 0 8.3 8.3l1.3-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>`
+      };
+      return icons[name];
+    }
+
+    function setIcons() {
+      els.menuIcon.innerHTML = state.mobileMenuOpen ? svgIcon("close") : svgIcon("menu");
+      els.globeIconDesktop.innerHTML = svgIcon("globe");
+      els.globeIconMobile.innerHTML = svgIcon("globe");
+      els.star1.innerHTML = svgIcon("star");
+      els.star2.innerHTML = svgIcon("star");
+      els.star3.innerHTML = svgIcon("star");
+      els.instagramIcon.innerHTML = svgIcon("instagram");
+      els.facebookIcon.innerHTML = svgIcon("facebook");
+      els.mapIcon.innerHTML = svgIcon("map");
+      els.phoneIcon.innerHTML = svgIcon("phone");
+    }
+
+    function applyLanguage() {
+      const t = translations[state.lang];
+
+      els.html.lang = state.lang;
+      els.html.dir = t.dir;
+      document.body.style.fontFamily = t.font;
+
+      els.navHome.textContent = t.nav.home;
+      els.navAbout.textContent = t.nav.about;
+      els.navMenu.textContent = t.nav.menu;
+      els.navContact.textContent = t.nav.contact;
+
+      els.mNavHome.textContent = t.nav.home;
+      els.mNavAbout.textContent = t.nav.about;
+      els.mNavMenu.textContent = t.nav.menu;
+      els.mNavContact.textContent = t.nav.contact;
+
+      els.langLabelDesktop.textContent = t.langLabelDesktop;
+      els.langLabelMobile.textContent = t.langLabelMobile;
+
+      els.heroTitle.innerHTML = state.lang === "ar"
+        ? `${t.hero.titleLeft}<span class="gold-gradient-text">${t.hero.titleGold}</span>`
+        : `${t.hero.titleLeft}<span class="gold-gradient-text">${t.hero.titleGold}</span>`;
+
+      els.heroSubtitle.textContent = t.hero.subtitle;
+      els.heroCta.textContent = t.hero.cta;
+
+      els.aboutTitle.textContent = t.about.title;
+      els.aboutDesc1.textContent = t.about.description1;
+      els.aboutDesc2.textContent = t.about.description2;
+      els.aboutSignature.textContent = t.about.signature;
+
+      els.menuTitle.textContent = t.menu.title;
+
+      els.footerAboutText.textContent = t.footerAbout;
+      els.contactTitle.textContent = t.contact.title;
+      els.contactAddress.textContent = t.contact.address;
+      els.contactHours.textContent = t.contact.hours;
+      els.footerRights.textContent = t.footer.rights;
+      els.footerMadeBy.textContent = t.footer.madeBy;
+      els.hoursTitle.textContent = t.hoursTitle;
+
+      renderTabs();
+      renderMenuItems();
+
+      setIcons();
+    }
+
+    function renderTabs() {
+      const t = translations[state.lang];
+      els.categoryTabs.innerHTML = "";
+
+      Object.keys(t.menu.categories).forEach((cat) => {
+        const btn = document.createElement("button");
+        btn.className = "tab" + (state.activeCategory === cat ? " active" : "");
+        btn.textContent = t.menu.categories[cat];
+        btn.addEventListener("click", () => {
+          state.activeCategory = cat;
+          renderTabs();
+          renderMenuItems();
+        });
+        els.categoryTabs.appendChild(btn);
+      });
+    }
+
+    function renderMenuItems() {
+      const t = translations[state.lang];
+      const filtered = t.menu.items.filter(item => item.category === state.activeCategory);
+
+      els.menuGrid.innerHTML = filtered.map(item => `
+        <article class="card luxury-border reveal-hidden" data-reveal>
+          <div class="card-media">
+            <img src="${item.img}" alt="${item.name}">
+            <div class="card-overlay"></div>
+            <h3 class="card-title">${item.name}</h3>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">${item.desc}</p>
+            <div class="card-footer">
+              <span class="price">${item.price}</span>
+              <button class="order-btn">${t.order}</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      observeReveals();
+    }
+
+    function observeReveals() {
+      const items = document.querySelectorAll("[data-reveal]");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.getAttribute("data-delay") || 0;
+            entry.target.style.transitionDelay = `${delay}ms`;
+            entry.target.classList.add("reveal-visible");
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+      items.forEach(el => {
+        el.classList.add("reveal-hidden");
+        observer.observe(el);
+      });
+    }
+
+    function toggleLanguage() {
+      state.lang = state.lang === "ar" ? "fr" : "ar";
+      applyLanguage();
+    }
+
+    function toggleMobileMenu() {
+      state.mobileMenuOpen = !state.mobileMenuOpen;
+      els.mobileMenu.classList.toggle("open", state.mobileMenuOpen);
+      setIcons();
+    }
+
+    function closeMobileMenu() {
+      state.mobileMenuOpen = false;
+      els.mobileMenu.classList.remove("open");
+      setIcons();
+    }
+
+    els.mobileToggle.addEventListener("click", toggleMobileMenu);
+    els.langBtnDesktop.addEventListener("click", toggleLanguage);
+    els.langBtnMobile.addEventListener("click", toggleLanguage);
+
+    document.querySelectorAll("#mobileMenu a").forEach(a => {
+      a.addEventListener("click", closeMobileMenu);
+    });
+
+    window.addEventListener("scroll", () => {
+      els.navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) closeMobileMenu();
+    });
+
+    applyLanguage();
+    observeReveals();
+  </script>
+</body>
+</html>
